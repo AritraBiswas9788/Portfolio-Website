@@ -8,7 +8,7 @@ const shareTechMono = Share_Tech_Mono({ subsets: ['latin'], weight: '400' });
 
 const links = [
     { name: 'home', path: "/" },
-    { name: 'about me', path: "/services" },
+    { name: 'about me', path: "/about" },
     { name: 'work', path: "/work" },
     { name: 'contact', path: "/contact" },
 ];
