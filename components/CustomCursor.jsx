@@ -70,7 +70,7 @@ export default function CustomCursor() {
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
-  if (!enabled) return null;
+
   return (
     <>
       {/* Small dot */}

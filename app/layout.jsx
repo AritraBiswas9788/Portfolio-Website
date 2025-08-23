@@ -5,7 +5,7 @@ import "./globals.css";
 import Header from "../components/Header.jsx";
 import PageTransition from "../components/PageTransition";
 import StairTransition from "../components/StairTransition";
-import CustomCursor from "../components/CustomCursor.jsx";
+import ClientOnlyCursor from "../components/ClientCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${JetBrainsMono.variable} antialiased`}
       >
-        <CustomCursor/>
+        <ClientOnlyCursor/>
         <Header/>
         <StairTransition/>
         <PageTransition>
