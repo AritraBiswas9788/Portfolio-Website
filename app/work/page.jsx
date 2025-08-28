@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -142,9 +142,19 @@ const projects = [
 
 const Work = () => {
   const [project, setProject] = useState(projects[0]);
+  const swiperRefs = useRef([]);
+
   const handleSlideChange = (swiper) => {
     const currentIndex = swiper.activeIndex;
     setProject(projects[currentIndex]);
+    if (swiperRefs.current[currentIndex]) {
+      swiperRefs.current[currentIndex].slideTo(0); // reset to first image
+      if (swiperRefs.current[currentIndex].autoplay) {
+        swiperRefs.current[currentIndex].stop();   // stop any running cycle
+        swiperRefs.current[currentIndex].start();  // restart timer from zero
+      }
+      // swiperRefs.current[currentIndex].autoplay.start(); // restart autoplay fresh
+    }
   };
 
   return (
@@ -233,6 +243,7 @@ const Work = () => {
               spaceBetween={30}
               slidesPerView={1}
               className="xl:h-[420px] mb-12 relative"
+              allowTouchMove={false} // disable manual swiping
               onSlideChange={handleSlideChange}
             >
               {projects.map((proj, index) => (
@@ -247,7 +258,7 @@ const Work = () => {
                       modules={[Autoplay, Pagination]}
                       spaceBetween={0}
                       slidesPerView={1}
-                      allowTouchMove={false} // disable manual swiping
+                      onSwiper={(swiper) => (swiperRefs.current[index] = swiper)}
                       pagination={{
                         clickable: true,
                         bulletClass: "swiper-pagination-bullet !bg-green-500",
